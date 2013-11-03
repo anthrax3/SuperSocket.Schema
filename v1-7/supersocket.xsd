@@ -45,6 +45,15 @@
         </xs:annotation>
       </xs:element>
     </xs:sequence>
+    <xs:attribute name="defaultCulture" use="optional">
+      <xs:annotation>
+        <xs:documentation>Optional System.String </xs:documentation>
+        <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigDefaultCulture</xs:appinfo>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="maxWorkingThreads" use="optional">
       <xs:annotation>
         <xs:documentation>Optional System.Int32 [-1]</xs:documentation>
@@ -108,6 +117,7 @@
         <xs:restriction base="xs:string">
           <xs:enumeration value="None" />
           <xs:enumeration value="AppDomain" />
+          <xs:enumeration value="Process" />
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -153,7 +163,16 @@
           <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerCommandAssemblies</xs:appinfo>
         </xs:annotation>
       </xs:element>
-    </xs:sequence>    
+    </xs:sequence>
+    <xs:attribute name="defaultCulture" use="optional">
+      <xs:annotation>
+        <xs:documentation>Optional System.String </xs:documentation>
+        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerDefaultCulture</xs:appinfo>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="serverTypeName" use="optional">
       <xs:annotation>
         <xs:documentation>Optional System.String </xs:documentation>
@@ -426,7 +445,16 @@
       <xs:simpleType>
         <xs:restriction base="xs:string" />
       </xs:simpleType>
-    </xs:attribute>    
+    </xs:attribute>
+    <xs:attribute name="textEncoding" use="optional">
+      <xs:annotation>
+        <xs:documentation>Optional System.String []</xs:documentation>
+        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerTextEncoding</xs:appinfo>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string" />
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="name" use="optional">
       <xs:annotation>
         <xs:documentation>Optional System.String </xs:documentation>
@@ -466,6 +494,18 @@
         <xs:restriction base="xs:string" />
       </xs:simpleType>
     </xs:attribute>
+    <xs:attribute name="storeLocation" use="optional">
+      <xs:annotation>
+        <xs:documentation>Optional System.Security.Cryptography.X509Certificates.StoreLocation [CurrentUser]</xs:documentation>
+        <xs:appinfo>SuperSocket.SocketEngine.Configuration.CertificateConfigStoreLocation</xs:appinfo>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CurrentUser" />
+          <xs:enumeration value="LocalMachine" />
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
     <xs:attribute name="thumbprint" use="optional">
       <xs:annotation>
         <xs:documentation>Optional System.String </xs:documentation>
@@ -473,6 +513,15 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:string" />
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attribute name="clientCertificateRequired" use="optional">
+      <xs:annotation>
+        <xs:documentation>Optional System.Boolean [False]</xs:documentation>
+        <xs:appinfo>SuperSocket.SocketEngine.Configuration.CertificateConfigClientCertificateRequired</xs:appinfo>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:boolean" />
       </xs:simpleType>
     </xs:attribute>
   </xs:complexType>
