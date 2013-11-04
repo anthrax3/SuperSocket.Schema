@@ -7,7 +7,8 @@
            attributeFormDefault="unqualified" 
            vs:helpNamespace="http://schemas.microsoft.com/.NetConfiguration/v2.0"
 		   xmlns:tns="http://SuperSocket.SocketEngine.Configuration.SocketServiceConfig">
-  <xs:complexType name="superSocket" vs:help="configuration/superSocket">
+  <xs:element name="superSocket" vs:help="configuration/superSocket">
+  <xs:complexType>
     <xs:sequence>
       <xs:element minOccurs="0" name="servers" type="tns:serversCT">
         <xs:annotation>
@@ -631,4 +632,5 @@
       </xs:simpleType>
     </xs:attribute>
   </xs:complexType>
+  </xs:element>
 </xs:schema>
