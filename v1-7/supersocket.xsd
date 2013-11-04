@@ -5,7 +5,8 @@
            elementFormDefault="qualified"
            targetNamespace="http://schema.supersocket.net/supersocket"           
            attributeFormDefault="unqualified" 
-           vs:helpNamespace="http://schemas.microsoft.com/.NetConfiguration/v2.0">
+           vs:helpNamespace="http://schemas.microsoft.com/.NetConfiguration/v2.0"
+		   xmlns:tns="http://SuperSocket.SocketEngine.Configuration.SocketServiceConfig">
   <xs:complexType name="superSocket" vs:help="configuration/superSocket">
     <xs:sequence>
       <xs:element minOccurs="0" name="servers" type="tns:serversCT">
