@@ -1,584 +1,147 @@
-<?xml version="1.0"?>
-<xs:schema xmlns="http://schema.supersocket.net/supersocket"
-		   xmlns:vs="http://schemas.microsoft.com/Visual-Studio-Intellisense"
-		   xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           elementFormDefault="qualified"
-           targetNamespace="http://schema.supersocket.net/supersocket"           
-           attributeFormDefault="unqualified" 
-           vs:helpNamespace="http://schemas.microsoft.com/.NetConfiguration/v2.0">
-  <xs:complexType name="superSocket" vs:help="configuration/superSocket">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://schema.supersocket.net/supersocket"
+	targetNamespace="http://schema.supersocket.net/supersocket"
+	xmlns:tns="http://schema.supersocket.net/supersocket"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+  <xs:element name="superSocket">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="servers" minOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="server" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="certificate" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:attribute name="filePath" type="xs:string"></xs:attribute>
+                        <xs:attribute name="password" type="xs:string"></xs:attribute>
+                        <xs:attribute name="storeName" type="xs:string"></xs:attribute>
+                        <xs:attribute name="thumbprint" type="xs:string"></xs:attribute>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="listeners" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="add" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute name="ip" type="xs:string"></xs:attribute>
+                              <xs:attribute name="port" type="xs:integer"></xs:attribute>
+                              <xs:attribute name="backlog" type="xs:integer"></xs:attribute>
+                              <xs:attribute name="security">
+                                <xs:simpleType>
+                                  <xs:restriction base="xs:string">
+                                    <xs:enumeration value="None"/>
+                                    <xs:enumeration value="Tls"/>
+                                  </xs:restriction>
+                                </xs:simpleType>
+                              </xs:attribute>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="commandAssemblies" minOccurs="0" maxOccurs="1">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="add" maxOccurs="unbounded">
+                            <xs:complexType>
+                              <xs:attribute name="assembly" type="xs:string"></xs:attribute>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="name" type="xs:string"></xs:attribute>
+                  <xs:attribute name="serverType" type="xs:string"></xs:attribute>
+                  <xs:attribute name="serverTypeName" type="xs:string"></xs:attribute>
+                  <xs:attribute name="ip" type="xs:string"></xs:attribute>
+                  <xs:attribute name="port" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="listenBacklog" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="mode">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="Tcp"/>
+                        <xs:enumeration value="Udp"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="security">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="None"/>
+                        <xs:enumeration value="Tls"/>
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="disabled" type="xs:boolean"></xs:attribute>
+                  <xs:attribute name="startupOrder" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="sendTimeOut" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="sendingQueueSize" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="maxConnectionNumber" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="receiveBufferSize" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="sendBufferSize" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="syncSend" type="xs:boolean"></xs:attribute>
+                  <xs:attribute name="logCommand" type="xs:boolean"></xs:attribute>
+                  <xs:attribute name="logBasicSessionActivity" type="xs:boolean"></xs:attribute>
+                  <xs:attribute name="clearIdleSession" type="xs:boolean"></xs:attribute>
+                  <xs:attribute name="disableSessionSnapshot" type="xs:boolean"></xs:attribute>
+                  <xs:attribute name="clearIdleSessionInterval" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="idleSessionTimeOut" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="maxRequestLength" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="sessionSnapshotInterval" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="keepAliveTime" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="keepAliveInterval" type="xs:integer"></xs:attribute>
+                  <xs:attribute name="connectionFilter" type="xs:string"></xs:attribute>
+                  <xs:attribute name="commandLoader" type="xs:string"></xs:attribute>
+                  <xs:attribute name="logFactory" type="xs:string"></xs:attribute>
+                  <xs:attribute name="receiveFilterFactory" type="xs:string"></xs:attribute>
+                  <xs:anyAttribute></xs:anyAttribute>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="serverTypes" minOccurs="0" type="tns:typeDef">
+        </xs:element>
+        <xs:element name="connectionFilters" minOccurs="0" type="tns:typeDef">
+        </xs:element>
+        <xs:element name="logFactories" minOccurs="0" type="tns:typeDef">
+        </xs:element>
+        <xs:element name="receiveFilterFactories" minOccurs="0" type="tns:typeDef">
+        </xs:element>
+        <xs:element name="commandLoaders" minOccurs="0" type="tns:typeDef">
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="maxWorkingThreads" type="xs:integer"></xs:attribute>
+      <xs:attribute name="minWorkingThreads" type="xs:integer"></xs:attribute>
+      <xs:attribute name="maxCompletionPortThreads" type="xs:integer"></xs:attribute>
+      <xs:attribute name="minCompletionPortThreads" type="xs:integer"></xs:attribute>
+      <xs:attribute name="performanceDataCollectInterval" type="xs:integer"></xs:attribute>
+      <xs:attribute name="isolation">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="AppDomain"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+      <xs:attribute name="logFactory" type="xs:string"></xs:attribute>
+      <xs:attribute name="disablePerformanceDataCollector" type="xs:boolean"></xs:attribute>
+      <xs:anyAttribute></xs:anyAttribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="typeDef">
     <xs:sequence>
-      <xs:element minOccurs="0" name="servers" type="tns:serversCT">
-        <xs:annotation>
-          <xs:documentation>Optional SuperSocket.SocketEngine.Configuration.ServerCollection </xs:documentation>
-          <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigServers</xs:appinfo>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="serverTypes" type="tns:serverTypesCT">
-        <xs:annotation>
-          <xs:documentation>Optional SuperSocket.SocketBase.Config.TypeProviderCollection </xs:documentation>
-          <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigServerTypes</xs:appinfo>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="connectionFilters" type="tns:serverTypesCT">
-        <xs:annotation>
-          <xs:documentation>Optional SuperSocket.SocketBase.Config.TypeProviderCollection </xs:documentation>
-          <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigConnectionFilters</xs:appinfo>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="logFactories" type="tns:serverTypesCT">
-        <xs:annotation>
-          <xs:documentation>Optional SuperSocket.SocketBase.Config.TypeProviderCollection </xs:documentation>
-          <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigLogFactories</xs:appinfo>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="receiveFilterFactories" type="tns:serverTypesCT">
-        <xs:annotation>
-          <xs:documentation>Optional SuperSocket.SocketBase.Config.TypeProviderCollection </xs:documentation>
-          <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigReceiveFilterFactories</xs:appinfo>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="commandLoaders" type="tns:serverTypesCT">
-        <xs:annotation>
-          <xs:documentation>Optional SuperSocket.SocketBase.Config.TypeProviderCollection </xs:documentation>
-          <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigCommandLoaders</xs:appinfo>
-        </xs:annotation>
+      <xs:element name="add" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="name" type="xs:string"></xs:attribute>
+          <xs:attribute name="type" type="xs:string"></xs:attribute>
+        </xs:complexType>
       </xs:element>
     </xs:sequence>
-    <xs:attribute name="maxWorkingThreads" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [-1]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigMaxWorkingThreads</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="minWorkingThreads" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [-1]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigMinWorkingThreads</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="maxCompletionPortThreads" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [-1]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigMaxCompletionPortThreads</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="minCompletionPortThreads" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [-1]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigMinCompletionPortThreads</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="performanceDataCollectInterval" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [60]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigPerformanceDataCollectInterval</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="disablePerformanceDataCollector" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Boolean [False]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigDisablePerformanceDataCollector</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:boolean" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="isolation" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional SuperSocket.SocketBase.IsolationMode [None]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigIsolation</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="None" />
-          <xs:enumeration value="AppDomain" />
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="logFactory" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String []</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.SocketServiceConfigLogFactory</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:complexType>
-  <xs:element name="superSocket" type="tns:superSocketCT" />
-  <xs:complexType name="serversCT">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="1" name="clear">
-        <xs:complexType />
-      </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="remove">
-        <xs:complexType />
-      </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="server" type="tns:ServerCT" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="ServerCT">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="certificate" type="tns:certificateCT">
-        <xs:annotation>
-          <xs:documentation>Optional SuperSocket.SocketEngine.Configuration.CertificateConfig </xs:documentation>
-          <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerCertificateConfig</xs:appinfo>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="listeners" type="tns:listenersCT">
-        <xs:annotation>
-          <xs:documentation>Optional SuperSocket.SocketEngine.Configuration.ListenerConfigCollection </xs:documentation>
-          <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerListeners</xs:appinfo>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="commandAssemblies" type="tns:commandAssembliesCT">
-        <xs:annotation>
-          <xs:documentation>Optional SuperSocket.SocketEngine.Configuration.CommandAssemblyCollection </xs:documentation>
-          <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerCommandAssemblies</xs:appinfo>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>    
-    <xs:attribute name="serverTypeName" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerServerTypeName</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="serverType" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerServerType</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="receiveFilterFactory" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerReceiveFilterFactory</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="ip" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerIp</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="port" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerPort</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="mode" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional SuperSocket.SocketBase.SocketMode [Tcp]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerMode</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string">
-          <xs:enumeration value="Tcp" />
-          <xs:enumeration value="Udp" />
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="disabled" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Boolean [false]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerDisabled</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:boolean" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="sendTimeOut" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [5000]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerSendTimeOut</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="maxConnectionNumber" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [100]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerMaxConnectionNumber</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="receiveBufferSize" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [4096]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerReceiveBufferSize</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="sendBufferSize" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [2048]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerSendBufferSize</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="syncSend" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Boolean [False]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerSyncSend</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:boolean" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="logCommand" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Boolean [False]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerLogCommand</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:boolean" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="logBasicSessionActivity" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Boolean [True]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerLogBasicSessionActivity</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:boolean" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="logAllSocketException" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Boolean [False]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerLogAllSocketException</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:boolean" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="clearIdleSession" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Boolean [False]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerClearIdleSession</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:boolean" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="clearIdleSessionInterval" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [120]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerClearIdleSessionInterval</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="idleSessionTimeOut" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [300]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerIdleSessionTimeOut</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="security" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String [None]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerSecurity</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="maxRequestLength" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [1024]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerMaxRequestLength</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="disableSessionSnapshot" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Boolean [False]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerDisableSessionSnapshot</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:boolean" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="sessionSnapshotInterval" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [5]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerSessionSnapshotInterval</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="connectionFilter" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerConnectionFilter</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="commandLoader" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerCommandLoader</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="keepAliveTime" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [600]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerKeepAliveTime</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="keepAliveInterval" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [60]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerKeepAliveInterval</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="listenBacklog" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [100]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerListenBacklog</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="startupOrder" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [0]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerStartupOrder</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="sendingQueueSize" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [5]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerSendingQueueSize</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="logFactory" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String []</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ServerLogFactory</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>    
-    <xs:attribute name="name" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.Common.ConfigurationElementBaseName</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:complexType>
-  <xs:complexType name="certificateCT">
-    <xs:sequence />
-    <xs:attribute name="filePath" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.CertificateConfigFilePath</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="password" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.CertificateConfigPassword</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="storeName" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.CertificateConfigStoreName</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="thumbprint" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.CertificateConfigThumbprint</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:complexType>
-  <xs:complexType name="listenersCT">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="1" name="clear">
-        <xs:complexType />
-      </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="remove">
-        <xs:complexType />
-      </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="add" type="tns:ListenerCT" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="ListenerCT">
-    <xs:sequence />
-    <xs:attribute name="ip" use="required">
-      <xs:annotation>
-        <xs:documentation>Required System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ListenerIp</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="port" use="required">
-      <xs:annotation>
-        <xs:documentation>Required System.Int32 </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ListenerPort</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="backlog" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.Int32 [100]</xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ListenerBacklog</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:int" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="security" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.ListenerSecurity</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:complexType>
-  <xs:complexType name="commandAssembliesCT">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="1" name="clear">
-        <xs:complexType />
-      </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="remove">
-        <xs:complexType />
-      </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="add" type="tns:CommandAssemblyCT" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="CommandAssemblyCT">
-    <xs:sequence />
-    <xs:attribute name="assembly" use="optional">
-      <xs:annotation>
-        <xs:documentation>Optional System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketEngine.Configuration.CommandAssemblyAssembly</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:complexType>
-  <xs:complexType name="serverTypesCT">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="1" name="clear">
-        <xs:complexType />
-      </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="remove">
-        <xs:complexType />
-      </xs:element>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="add" type="tns:TypeProviderCT" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="TypeProviderCT">
-    <xs:sequence />
-    <xs:attribute name="name" use="required">
-      <xs:annotation>
-        <xs:documentation>Required System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketBase.Config.TypeProviderName</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
-    <xs:attribute name="type" use="required">
-      <xs:annotation>
-        <xs:documentation>Required System.String </xs:documentation>
-        <xs:appinfo>SuperSocket.SocketBase.Config.TypeProviderType</xs:appinfo>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:string" />
-      </xs:simpleType>
-    </xs:attribute>
   </xs:complexType>
 </xs:schema>
