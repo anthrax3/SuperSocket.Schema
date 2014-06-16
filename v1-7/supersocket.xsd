@@ -18,6 +18,7 @@
                       <xs:complexType>
                         <xs:attribute name="filePath" type="xs:string"></xs:attribute>
                         <xs:attribute name="password" type="xs:string"></xs:attribute>
+                        <xs:attribute name="keyStorageFlags" type="xs:string"></xs:attribute>
                         <xs:attribute name="storeName" type="xs:string"></xs:attribute>
                         <xs:attribute name="storeLocation" type="xs:string"></xs:attribute>
                         <xs:attribute name="thumbprint" type="xs:string"></xs:attribute>
